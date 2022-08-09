@@ -63,4 +63,18 @@ class ArticleRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+    /**
+     * @return Article[] Returns an array of Article objects
+     */
+    public function findAllArticles($value=null): array
+    {
+        return $this->createQueryBuilder('a')
+         ->innerJoin('a.tags','tag')
+         ->addSelect('tag')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
